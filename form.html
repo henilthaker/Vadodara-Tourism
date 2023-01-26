@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form</title>
+    <style>
+        .formerror {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <form onsubmit="return formValidate()">
+
+        <div id="name">
+            Name <input type="text" id="fname" required> <span class="formerror"> </span>
+        </div>
+        <br>
+        <div id="mobile">
+            Mobile No. <input type="text" id="mo_number" required> <span class="formerror"> </span>
+        </div>
+        <br>
+        <div id="email">
+            Email <input type="text" id="email_id" required> <span class="formerror"> </span>
+        </div>
+        <br>
+        <div id="password">
+            Password<input type="password" id="password" required> <span class="formerror"> </span>
+        </div>
+
+        <br>
+        <input type="submit" value="submit">
+        <input type="reset" value="clear">
+    </form>
+
+    <script>
+
+        function seterror(id, error) {
+            const invalid = document.getElementById(id);
+            invalid.querySelectorAll('.formerror')[0].innerHTML = error;
+        }
+        function formValidate() {
+            let returnValue = true;
+
+            elements=document.querySelectorAll('.formerror');
+            for(let item of elements)
+            {
+                item.innerHTML="";
+            }
+
+            const element1 = document.querySelector("#fname");
+            let regex1 = /^[a-zA-Z ]{2,30}$/;
+            if (!(regex1.test(element1.value))) {
+                seterror("name", "Invalid format");
+                // alert("wrong format in Name");
+                returnValue = false;
+            }
+            // if (element1.value.length < 5) {
+            //     seterror("fname","Very short name");
+            //     returnValue = false;
+            // }
+            const element2 = document.querySelector("#mobile");
+            let regex2 = /^[a-zA-Z ]{2,30}$/;
+            if (!(regex2.test(element2.value))) {
+                seterror("mobile", "Invalid format");
+                // alert("wrong format in Mobile Number");
+                returnValue = false;
+            }
+            const element3 = document.querySelector("#email_id");
+            let regex3 = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+            if (!(regex3.test(element3.value))) {
+                seterror("email", "Invalid format");
+                // alert("wrong format in email");
+                returnValue = false;
+            }
+            return returnValue;
+        }
+    </script>
+</body>
+
+</html>
